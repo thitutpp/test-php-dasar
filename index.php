@@ -1,3 +1,8 @@
+<?php 
+include 'function.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,11 +51,10 @@
                         <?php 
     
                     //Data Master
-                    $nilai = array(72, 65, 73, 78, 75, 74, 90, 81, 87, 65, 55, 69, 72, 78, 79, 91, 100, 40, 67, 77, 86);
-                    echo "Data Nilai Siswa = ";
-                    foreach($nilai as $value){
-                        echo $value , "," ;
-                    }
+                    $nilaiawal = "72 65 73 78 75 74 90 81 87 65 55 69 72 78 79 91 100 40 67 77 86";
+                    $nilai = explode(" ",$nilaiawal); 
+                    // $nilai = array(72, 65, 73, 78, 75, 74, 90, 81, 87, 65, 55, 69, 72, 78, 79, 91, 100, 40, 67, 77, 86);
+
                     
                     //Mencari Nilai Rata-rata
                     $average = array_sum($nilai) / count($nilai);
@@ -62,23 +66,15 @@
                     $sort_highest_data= rsort($nilai);
                     $unique_highest_value= array_unique($nilai);
                     $limit_highest_value=array_splice($unique_highest_value, 0, 7);
-                    echo "7 Nilai Tertinggi = ";
-                    foreach ($limit_highest_value as $data ) {
-                        echo $data . ",";
-                    }
-                    //Menampilkan Nilai Tertinggi
-                    
+                    echo "7 Nilai Tertinggi = ". implode(", ",$limit_highest_value);
+                   
                     //Menampilkan Nilai Terendah
                     echo "<br>";
                     $sort_lowest_data= sort($nilai);
                     $unique_lowest_value= array_unique($nilai);
                     $limit_lowest_value=array_splice($unique_lowest_value, 0, 7);
-                    echo "7 Nilai Terendah = ";
-                    foreach ($limit_lowest_value as $data ) {
-                        echo $data . ",";
-                    }
+                    echo "7 Nilai Terendah = ". implode(", ", $limit_lowest_value);
                     //Menampilkan Nilai Terendah
-    
     
     
         
@@ -103,7 +99,7 @@
                     <h5 class="card-title">Jawaban :</h5>
                     <p class="card-text">
                         <form name="form" action="" method="post">
-                            <input type="text" name="subject" id="subject">
+                            <input type="text" name="subject" id="subject" placeholder="Masukan Kata">
                             <button type="submit" name="submit" class="btn btn-primary m-2 ">Jalankan</button>
                             <!-- <button type="reset" class="btn btn-primary m-2">Reset</button> -->
 
@@ -111,13 +107,11 @@
 
 
                         <?php 
-                    if(isset($_POST['submit'])){
-                        
-
-
-
-                        }
-                    ?>
+                        $string = $_POST['subject']??'';
+                        echo $string;
+                        echo "<br>";
+                        echo "Total karakter kecil adalah ". hitung($string) .'<br>';
+                        ?>
 
 
                     </p>
@@ -143,9 +137,29 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jawaban :</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">
+                        <form name="form" action="" method="post">
+                            <input type="text" name="ngram" id="ngram" placeholder="Masukan Kata">
+                            <button type="submit" name="submit" class="btn btn-primary m-2 ">Jalankan</button>
+                            <!-- <button type="reset" class="btn btn-primary m-2">Reset</button> -->
+
+                        </form>
+
+                        <?php  
+                        $input = $_POST['ngram']??''; 
+                        ?>
+
+                        <ul>
+                            <li>Unigram : <?php echo unigram($input); ?></li>
+                            <li>Bigram  : <?php echo bigram($input); ?></li>
+                            <li>Trigram : <?php echo trigram($input); ?></li>
+                        </ul>
+
+
+                    </p>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Bagian 1 : PHP Dasar -->
@@ -159,6 +173,7 @@
         </div>
 
         <div class="container">
+
             <div class="card m-4">
                 <div class="card-header bg-success">
                     <div class="d-flex flex-row bd-highlight mb-3">
@@ -176,9 +191,31 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jawaban :</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div>
+                        <?php 
+                        $no = 1;
+                        $v = 1;
+                        echo "<table>";
+                        for($i = 0; $i < 8; $i++){
+                        echo '<tr>';
+                            for($x = 0; $x < 8; $x++){
+                            echo '<td '.pola($v).'>';
+                            echo $no++;
+                            echo '</td>';
+                            if ($v==12) {
+                                $v = 1;
+                            } else {
+                                $v++;
+                            }
+                            }
+                        echo '</tr>';
+                        }
+                        echo "</table>";
+                        ?>  
+                    </div>
                 </div>
             </div>
+
             <div class="card m-4">
                 <div class="card-header bg-success d-flex flex-row bd-highlight mb-3">
                     <div class="p-2 bd-highlight text-white">
@@ -189,9 +226,14 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jawaban :</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">
+                        <?php 
+                        echo enkrip('DFHKNQ');
+                        ?>
+                    </p>
                 </div>
             </div>
+            
         </div>
     </div>
     <!-- Bagian 1 : PHP Dasar (2) -->
