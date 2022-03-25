@@ -226,10 +226,26 @@ include 'function.php';
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jawaban :</h5>
+                        <form name="form" action="" method="post">
+                            <input type="text" name="enkripsi" id="enkripsi" placeholder="Masukan Kata">
+                            <button type="submit" name="submit" class="btn btn-primary m-2 ">Jalankan</button>
+                            <!-- <button type="reset" class="btn btn-primary m-2">Reset</button> -->
+
+                        </form>
                     <p class="card-text">
-                        <?php 
-                        echo enkrip('DFHKNQ');
+
+                        <?php  
+                        $input = $_POST['enkripsi']??''; 
                         ?>
+
+                        <?php 
+                        
+                  
+                            echo enkrip($input);
+                     
+                        ?>
+
+                        
                     </p>
                 </div>
             </div>
