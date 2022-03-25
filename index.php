@@ -291,7 +291,9 @@ include 'function.php';
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jawaban :</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">
+                        
+                    </p>
                 </div>
             </div>
         </div>
